@@ -1,5 +1,6 @@
 // deviceHandlers.js
-const setupDevice = (ws, deviceName, userConnections) => {
+const setupDevice = (ws, deviceName, userConnections, deviceConnections
+) => {
     ws.on('message', message => {
         console.log(`Message from device ${deviceName}:`, JSON.parse(message));
         const { type, content, targetUser } = JSON.parse(message);

@@ -1,5 +1,5 @@
 // userHandlers.js
-const setupUser = (ws, userName, deviceConnections) => {
+const setupUser = (ws, userName, deviceConnections, userConnections) => {
     ws.on('message', message => {
         console.log(`Message from user ${userName}:`, JSON.parse(message));
 
