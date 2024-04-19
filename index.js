@@ -3,7 +3,7 @@ const http = require('http');
 const initializeWebSocketServer = require('./src/websocket');
 require('dotenv').config();
 const db = require('./src/api/models');
-
+const { chatRooms, userConnections, deviceConnections } = require('./src/websocket/stateManager');
 
 
 const app = express();
@@ -14,7 +14,13 @@ initializeWebSocketServer(server);
 
 // Other middleware and routes setup
 // ...
-
+app.get('/admin/stats', (req, res) => {
+    res.json({
+        numberOfChatRooms: chatRooms.size,
+        numberOfUserConnections: userConnections.size,
+        numberOfDeviceConnections: deviceConnections.size
+    });
+});
 
 // Start the server 
 

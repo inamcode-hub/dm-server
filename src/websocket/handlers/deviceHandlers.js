@@ -1,6 +1,9 @@
 // deviceHandlers.js
 const WebSocket = require('ws');
-const setupDevice = (ws, deviceId, userConnections, deviceConnections, chatRooms) => {
+const { chatRooms, userConnections, deviceConnections } = require('../stateManager');
+
+
+const setupDevice = (ws, deviceId) => {
     // Ensure there is a room for the device
     if (!chatRooms.has(deviceId)) {
         chatRooms.set(deviceId, new Set());

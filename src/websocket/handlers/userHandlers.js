@@ -1,6 +1,7 @@
 // userHandlers.js
+const { chatRooms, userConnections, deviceConnections } = require('../stateManager');
 
-const setupUser = (ws, userId, userConnections, deviceConnections, chatRooms) => {
+const setupUser = (ws, userId) => {
     userConnections.set(userId, ws);
 
     console.log(`User connection established: ${userId}`);
@@ -9,7 +10,6 @@ const setupUser = (ws, userId, userConnections, deviceConnections, chatRooms) =>
     console.log(`Number of user connections: ${userConnections.size}`);
     console.log('-----------------------------------');
 
-    console.log(chatRooms)
     ws.on('message', message => {
         const { type, targetDevice } = JSON.parse(message);
 
