@@ -16,11 +16,9 @@ const initializeWebSocketServer = (server) => {
 
         wss.handleUpgrade(req, socket, head, (ws) => {
             if (pathname === '/device') {
-                deviceConnections.set(id, ws);
-                deviceHandlers.setupDevice(ws, id, userConnections, deviceConnections);
+                deviceHandlers.setupDevice(ws, id, userConnections, deviceConnections, chatRooms);
             } else if (pathname === '/user') {
-                userConnections.set(id, ws);
-                userHandlers.setupUser(ws, id, userConnections, deviceConnections);
+                userHandlers.setupUser(ws, id, userConnections, deviceConnections, chatRooms);
             } else {
                 socket.destroy();
             }
@@ -29,5 +27,6 @@ const initializeWebSocketServer = (server) => {
 
     return wss;
 };
+
 
 module.exports = initializeWebSocketServer;
